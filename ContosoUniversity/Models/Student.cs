@@ -15,6 +15,7 @@ namespace ContosoUniversity.Models
         public string FirstMidName { get; set; }
 
         [Display(Name = "Enrollment Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy MMMM dd}")]
         public DateTime EnrollmentDate { get; set; }
 
         public string Secret { get; set; }
