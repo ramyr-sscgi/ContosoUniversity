@@ -56,19 +56,20 @@ namespace ContosoUniversity.Logging
             TraceApi(componentName, method, timespan, "");
         }
 
-        public void TraceApi(string componentName, string method, TimeSpan timespan, string properties)
-        {
-            string message = $"Component: {componentName}; Method: {method}, Timespan: {timespan.ToString()}; Properties: {properties}";
-            Trace.TraceInformation(message);
-        }
-
         public void TraceApi(string componentName, string method, TimeSpan timespan, string fmt, params object[] vars)
         {
             TraceApi(componentName, method, timespan, string.Format(fmt, vars));
         }
-
-        private string FormatExceptionMessage(Exception exception, string fmt, object[] vars)
+        public void TraceApi(string componentName, string method, TimeSpan timespan, string properties)
         {
+            string message = String.Concat("Component:", componentName, ";Method:", method, ";Timespan:", timespan.ToString(), ";Properties:", properties);
+            Trace.TraceInformation(message);
+        }
+
+        private static string FormatExceptionMessage(Exception exception, string fmt, object[] vars)
+        {
+            // Simple exception formatting: for a more comprehensive version see 
+            // https://code.msdn.microsoft.com/windowsazure/Fix-It-app-for-Building-cdd80df4
             var sb = new StringBuilder();
             sb.Append(string.Format(fmt, vars));
             sb.Append(" Exception: ");

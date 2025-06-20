@@ -34,6 +34,7 @@ namespace ContosoUniversity.Controllers
 
             var students = from s in db.Students
                            select s;
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 students = students.Where(s => s.LastName.Contains(searchString)
@@ -62,7 +63,7 @@ namespace ContosoUniversity.Controllers
                     break;
             }
 
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
 
             return View(students.ToPagedList(pageNumber, pageSize));
